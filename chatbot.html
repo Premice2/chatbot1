@@ -13,18 +13,26 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script> 
     <script type="text/babel"> // this code is to tell the browser that the code inside this script tag is written in JSX and needs to be compiled by Babel before it can be executed.
-      const button = <button>Click Me</button>; 
+    
+    function ChatInput() {
+      return (
+        
+        <div>
+          <input /> 
+          <button>Send</button>
+        </div>
+
+      )
+    }
+
+   
+   const button = <button>Click Me</button>; 
       const div = (
       <div> 
-            <button>Click Me</button>
-            <p>hello mr</p>
-            <a href="https://youtube.com" target="_blank">Visit YouTube</a>
-            <ul>
-              <li>List Item 1</li>
-              <li>List Item 2</li>
-            </ul>
-            <input className="form-check-input" type="radio" name="gender" value="male"/>
-            <input className="form-check-input" type="radio" name="gender" value="female"/>
+
+
+            {ChatInput()}  
+            
         </div>);  // we can not put multiple html elements inside a single JSX element. To fix this, we can wrap the multiple elements inside a single parent element, such as a <div> or a <React.Fragment>.
      
      const container = document.querySelector('.js-container');
