@@ -17,22 +17,21 @@
       function ChatInput() {
         return (
           
-          <div>
+          <>
             <input /> 
             <button>Send</button>
-          </div>
+          </>
 
         )
       }
 
   
       const div = (
-        <div> 
-
+        <> 
           <ChatInput /> 
               
-        </div>
-      );  // we can not put multiple html elements inside a single JSX element. To fix this, we can wrap the multiple elements inside a single parent element, such as a <div> or a <React.Fragment>.
+        </>
+      );  // we can not put multiple html elements inside a single JSX element. To fix this, we can wrap the multiple elements inside a single parent element, such as a <div> or a <React.Fragment>. instead of using a <div>, we can use a <React.Fragment> to avoid adding an extra node to the DOM. In JSX, we can use the shorthand syntax <>...</> for <React.Fragment>.
       
       const container = document.querySelector('.js-container');
       ReactDOM.createRoot(container).render(div);
