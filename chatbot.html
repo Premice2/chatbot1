@@ -14,27 +14,60 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script> 
     <script type="text/babel"> // this code is to tell the browser that the code inside this script tag is written in JSX and needs to be compiled by Babel before it can be executed.
       
-      function ChatInput() {
+      function ChatInput() { // to create a React component, we can define a function that returns JSX. The function name should start with a capital letter to indicate that it is a React component. The function can take props as an argument, which is an object that contains the properties passed to the component. In this case, we are not using any props, so we can leave the argument empty. a component is a reusable piece of UI that can be rendered multiple times with different data. In this case, we are creating a ChatInput component that renders an input field and a button. The input field allows the user to type a message, and the button allows the user to send the message. We can use the onChange event to capture the user's input and update the component's state accordingly. We can also use the onClick event to handle the button click and send the message to the server or perform any other action.
         return (
           
           <>
-            <input /> 
+            <input type="text" placeholder="Send a message to ChatBox" size="30" /> 
             <button>Send</button>
           </>
 
         )
       }
 
+      function ChatMessage (props) { // we can pass data to a component using props. Props are read-only and cannot be modified by the component. In this case, we are passing a message prop to the ChatMessage component, which is a string that contains the message to be displayed. We can access the props object inside the component function and use it to render the message. We can also use destructuring to extract the message prop from the props object for convenience.
+        const message = props.message; // to access the message prop, we can use props.message. We can also use destructuring to extract the message prop from the props object for convenience. For example, we can write const { message } = props; instead of const message = props.message;. This way, we can use the message variable directly without having to write props.message every time. We can also use default props to provide a fallback value for the message prop in case it is not passed to the component. For example, we can write ChatMessage.defaultProps = { message: "No message" }; to set a default value for the message prop.
+        const sender = props.sender; // we can also pass a sender prop to the ChatMessage component, which is a string that indicates who sent the message. We can use this prop to conditionally render different styles or elements based on the sender. For example, we can render a different avatar image for the user and the robot, or we can align the messages differently based on the sender. We can also use CSS classes to style the messages based on the sender. For example, we can add a className prop to the message div and set it to "user-message" or "robot-message" based on the sender. Then we can define CSS rules for these classes to style the messages accordingly.
+
+        if (sender === "robot") {
+          return (
+            
+            <div>
+             <img src="images/robot.png" width="50" />
+             {message}
+            </div>
+
+          );
+        }
+
+        return (
+          
+          <div>
+           {message}
+           <img src="images/user.png" width="50" />
+          </div>
+
+        );
+      }
   
-      const div = (
+      const app = (
         <> 
           <ChatInput /> 
+          <ChatMessage message="hello ChatBox" sender="user" />
+          <ChatMessage message="hello! How can I help you?" sender="robot" />
+          <ChatMessage message="can you get today's date?" sender="user" />
+          <ChatMessage message="today is September 27" sender="robot" />
+          <ChatMessage message="how about flip a coin" sender="user" />
+          <ChatMessage message="sure! You get tails!" sender="robot" />
               
         </>
-      );  // we can not put multiple html elements inside a single JSX element. To fix this, we can wrap the multiple elements inside a single parent element, such as a <div> or a <React.Fragment>. instead of using a <div>, we can use a <React.Fragment> to avoid adding an extra node to the DOM. In JSX, we can use the shorthand syntax <>...</> for <React.Fragment>.
+      ); 
+        // up here we just created a messsage attribute to the ChatMessage component, which is a string that contains the message to be displayed. We can access the props object inside the component function and use it to render the message. We can also use destructuring to extract the message prop from the props object for convenience.
+
+       // we can not put multiple html elements inside a single JSX element. To fix this, we can wrap the multiple elements inside a single parent element, such as a <div> or a <React.Fragment>. instead of using a <div>, we can use a <React.Fragment> to avoid adding an extra node to the DOM. In JSX, we can use the shorthand syntax <>...</> for <React.Fragment>.
       
       const container = document.querySelector('.js-container');
-      ReactDOM.createRoot(container).render(div);
+      ReactDOM.createRoot(container).render(app);
     </script>
   </body>
 </html>
