@@ -68,61 +68,42 @@
       function App () {
        
         // this chatnessages variable(array ) is used to save the data of chatmessages
-        const chatMessages = [
-          {
+        const chatMessages = [{
             message: 'hello ChatBox',
             sender: 'user'
-          }, 
-          {
+          },{
             message: 'hello! How can I help you?',
             sender: 'robot'
-          },
-          {
+          },{
             message: 'can you get todays date?',
             sender: 'user'
-          },
-          {
+          },{
             message: 'today is September 27',
             sender: 'robot'
-          }, 
-          {
+          },{
             message: 'how about flip a coin',
             sender: 'user'
-          },
-          {
+          },{
             message: 'sure! You get tails!',
             sender: 'robot'
           }
           
         ];
+        
+        // to generate html for each data saved(object) in the array. .map() takes each element in our array and convert it into a new value
+        const chatMessageComponents = chatMessages.map((chatMessage) => {
+          return(
+            <ChatMessage
+              message={chatMessage.message}
+              sender={chatMessage.sender}
+            />
+          );
+        });
+
         return(
           <> 
             <ChatInput /> 
-
-            <ChatMessage 
-              message="hello ChatBox" 
-              sender="user" 
-            />
-            <ChatMessage 
-              message="hello! How can I help you?" 
-              sender="robot" 
-            />
-            <ChatMessage 
-              message="can you get today's date?" 
-              sender="user" 
-            />
-            <ChatMessage 
-              message="today is September 27" 
-              sender="robot" 
-            />
-            <ChatMessage 
-              message="how about flip a coin" 
-              sender="user" 
-            />
-            <ChatMessage 
-              message="sure! You get tails!" 
-              sender="robot" 
-            />       
+            {chatMessageComponents}
           </>
         );
       } 
