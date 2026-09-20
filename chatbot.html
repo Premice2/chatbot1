@@ -64,45 +64,62 @@
 
         );
       }
-      
-      function App () {
-       
-        // this chatnessages variable(array ) is used to save the data of chatmessages
+
+      function ChatMessages () {
+               // this chatnessages variable(array ) is used to save the data of chatmessages
         const chatMessages = [{
-            message: 'hello ChatBox',
-            sender: 'user'
+            message: 'hello ChatBot',
+            sender: 'user',
+            id: 'id1'
           },{
             message: 'hello! How can I help you?',
-            sender: 'robot'
+            sender: 'robot',
+            id: 'id2'
           },{
             message: 'can you get todays date?',
-            sender: 'user'
+            sender: 'user',
+            id: 'id3'
           },{
             message: 'today is September 27',
-            sender: 'robot'
+            sender: 'robot',
+            id: 'id4'
           },{
             message: 'how about flip a coin',
-            sender: 'user'
+            sender: 'user',
+            id: 'id15'
           },{
             message: 'sure! You get tails!',
-            sender: 'robot'
+            sender: 'robot',
+            id: 'id6'
           }
           
         ];
+        return (
+
+         <>
+            { chatMessages.map((chatMessage) => {
+              return(
+                <ChatMessage
+                  message={chatMessage.message}
+                  sender={chatMessage.sender}
+                  key = {chatMessage.id}
+                />
+              );
+            })}
+          </>
+        )
+      }
+      
+      function App () {
+       
+
         
         // to generate html for each data saved(object) in the array. .map() takes each element in our array and convert it into a new value
 
         return(
           <> 
             <ChatInput /> 
-            { chatMessages.map((chatMessage) => {
-              return(
-                <ChatMessage
-                  message={chatMessage.message}
-                  sender={chatMessage.sender}
-                />
-              );
-            })}
+            <ChatMessages />
           </>
         );
       } 
