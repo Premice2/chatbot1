@@ -18,7 +18,11 @@
         return (
           
           <>
-            <input type="text" placeholder="Send a message to ChatBox" size="30" /> 
+            <input 
+              type="text" 
+              placeholder="Send a message to ChatBox" 
+              size="30" 
+            /> 
             <button>Send</button>
           </>
 
@@ -47,9 +51,15 @@
         return (
           
           <div>
-            {sender === 'robot' && <img src="images/robot.png" width="50" />} 
+            {sender === 'robot' && (
+              <img src="images/robot.png" width="50" />
+             )
+            } 
            {message}
-            {sender === 'user' && <img src="images/user.png" width="50" />}
+            {sender === 'user' && (
+              <img src="images/user.png" width="50" />
+             )
+            }
           </div>
 
         );
@@ -58,12 +68,31 @@
       const app = (
         <> 
           <ChatInput /> 
-          <ChatMessage message="hello ChatBox" sender="user" />
-          <ChatMessage message="hello! How can I help you?" sender="robot" />
-          <ChatMessage message="can you get today's date?" sender="user" />
-          <ChatMessage message="today is September 27" sender="robot" />
-          <ChatMessage message="how about flip a coin" sender="user" />
-          <ChatMessage message="sure! You get tails!" sender="robot" />
+
+          <ChatMessage 
+            message="hello ChatBox" 
+            sender="user" 
+          />
+          <ChatMessage 
+            message="hello! How can I help you?" 
+            sender="robot" 
+          />
+          <ChatMessage 
+            message="can you get today's date?" 
+            sender="user" 
+          />
+          <ChatMessage 
+            message="today is September 27" 
+            sender="robot" 
+          />
+          <ChatMessage 
+            message="how about flip a coin" 
+            sender="user" 
+          />
+          <ChatMessage 
+            message="sure! You get tails!" 
+            sender="robot" 
+          />
               
         </>
       ); 
