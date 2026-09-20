@@ -91,19 +91,18 @@
         ];
         
         // to generate html for each data saved(object) in the array. .map() takes each element in our array and convert it into a new value
-        const chatMessageComponents = chatMessages.map((chatMessage) => {
-          return(
-            <ChatMessage
-              message={chatMessage.message}
-              sender={chatMessage.sender}
-            />
-          );
-        });
 
         return(
           <> 
             <ChatInput /> 
-            {chatMessageComponents}
+            { chatMessages.map((chatMessage) => {
+              return(
+                <ChatMessage
+                  message={chatMessage.message}
+                  sender={chatMessage.sender}
+                />
+              );
+            })}
           </>
         );
       } 
