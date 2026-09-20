@@ -66,6 +66,35 @@
       }
       
       function App () {
+       
+        // this chatnessages variable(array ) is used to save the data of chatmessages
+        const chatMessages = [
+          {
+            message: 'hello ChatBox',
+            sender: 'user'
+          }, 
+          {
+            message: 'hello! How can I help you?',
+            sender: 'robot'
+          },
+          {
+            message: 'can you get todays date?',
+            sender: 'user'
+          },
+          {
+            message: 'today is September 27',
+            sender: 'robot'
+          }, 
+          {
+            message: 'how about flip a coin',
+            sender: 'user'
+          },
+          {
+            message: 'sure! You get tails!',
+            sender: 'robot'
+          }
+          
+        ];
         return(
           <> 
             <ChatInput /> 
