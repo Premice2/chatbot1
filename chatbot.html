@@ -64,44 +64,45 @@
 
         );
       }
-  
-      const app = (
-        <> 
-          <ChatInput /> 
+      
+      function App () {
+        return(
+          <> 
+            <ChatInput /> 
 
-          <ChatMessage 
-            message="hello ChatBox" 
-            sender="user" 
-          />
-          <ChatMessage 
-            message="hello! How can I help you?" 
-            sender="robot" 
-          />
-          <ChatMessage 
-            message="can you get today's date?" 
-            sender="user" 
-          />
-          <ChatMessage 
-            message="today is September 27" 
-            sender="robot" 
-          />
-          <ChatMessage 
-            message="how about flip a coin" 
-            sender="user" 
-          />
-          <ChatMessage 
-            message="sure! You get tails!" 
-            sender="robot" 
-          />
-              
-        </>
-      ); 
+            <ChatMessage 
+              message="hello ChatBox" 
+              sender="user" 
+            />
+            <ChatMessage 
+              message="hello! How can I help you?" 
+              sender="robot" 
+            />
+            <ChatMessage 
+              message="can you get today's date?" 
+              sender="user" 
+            />
+            <ChatMessage 
+              message="today is September 27" 
+              sender="robot" 
+            />
+            <ChatMessage 
+              message="how about flip a coin" 
+              sender="user" 
+            />
+            <ChatMessage 
+              message="sure! You get tails!" 
+              sender="robot" 
+            />       
+          </>
+        );
+      } 
         // up here we just created a messsage attribute to the ChatMessage component, which is a string that contains the message to be displayed. We can access the props object inside the component function and use it to render the message. We can also use destructuring to extract the message prop from the props object for convenience.
 
        // we can not put multiple html elements inside a single JSX element. To fix this, we can wrap the multiple elements inside a single parent element, such as a <div> or a <React.Fragment>. instead of using a <div>, we can use a <React.Fragment> to avoid adding an extra node to the DOM. In JSX, we can use the shorthand syntax <>...</> for <React.Fragment>.
       
       const container = document.querySelector('.js-container');
-      ReactDOM.createRoot(container).render(app);
+      ReactDOM.createRoot(container).render(<App></App>);
     </script>
   </body>
 </html>
