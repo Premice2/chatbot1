@@ -67,7 +67,7 @@
 
       function ChatMessages () {
 
-        const array = React.useState( // this code is to convert the chatMessages (by adding React.usesate() and putting the variable inside this brakets ) into a state(data connected to the html) so that it can update the html when we click on it
+        const [chatMessages, setChatMessages] = React.useState( // this code is to convert the chatMessages (by adding React.usesate() and putting the variable inside this brakets ) into a state(data connected to the html) so that it can update the html when we click on it
           [{
               message: 'hello ChatBot',
               sender: 'user',
@@ -95,9 +95,9 @@
             }
           ]
         ); 
-        const [chatMessages, setChatMessages] = array; // this is a shortcut of writting the code below
+        //const [chatMessages, setChatMessages] = array; // this is a shortcut of writting the code below
         //const chatMessages = array[0]; // to get the first function of our array(state) called array distructuring
-        //const setChatMessages = array[1]; // this second fonction is used to update the data
+        //const setChatMessages = array[1]; // this second fonction is used to update the data.
 
 
         function sendMessage () {
