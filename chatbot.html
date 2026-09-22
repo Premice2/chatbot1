@@ -66,7 +66,6 @@
       }
 
       function ChatMessages () {
-        // this chatnessages variable(array ) is used to save the data of chatmessages
 
         const array = React.useState( // this code is to convert the chatMessages (by adding React.usesate() and putting the variable inside this brakets ) into a state so that it can update the html when we click on it
           [{
@@ -96,10 +95,26 @@
             }
           ]
         ); 
+        const chatMessages = array[0]; // to get the first object of our array(state)
+        const setChatMessages = array[1];
 
+
+        function sendMessage () {
+          // this code is to update the data
+          setChatMessages([
+            ...chatMessages, // this is how to copy something (...and the name of the array we want to copy in our case is chatMessages)
+            // this below is the array that we want to add after coping the first one
+            {
+             message: 'test',
+             sender: 'user',
+             id: crypto.randomUUID() //to create a new unique id
+            }
+          ])
+        }
         return (
 
          <>
+            <button onClick={sendMessage} >send Message</button>
             { chatMessages.map((chatMessage) => {
               return(
                 <ChatMessage
