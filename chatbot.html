@@ -14,10 +14,25 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script> 
     <script type="text/babel"> // this code is to tell the browser that the code inside this script tag is written in JSX and needs to be compiled by Babel before it can be executed.
       
-      function ChatInput() { // to create a React component, we can define a function that returns JSX. The function name should start with a capital letter to indicate that it is a React component. The function can take props as an argument, which is an object that contains the properties passed to the component. In this case, we are not using any props, so we can leave the argument empty. a component is a reusable piece of UI that can be rendered multiple times with different data. In this case, we are creating a ChatInput component that renders an input field and a button. The input field allows the user to type a message, and the button allows the user to send the message. We can use the onChange event to capture the user's input and update the component's state accordingly. We can also use the onClick event to handle the button click and send the message to the server or perform any other action.
-      function saveInputText (event) {
-        event.target.value //to get the text inside the input element
-      }
+      function ChatInput({chatMessages, setChatMessages}) { // to create a React component, we can define a function that returns JSX. The function name should start with a capital letter to indicate that it is a React component. The function can take props as an argument, which is an object that contains the properties passed to the component. In this case, we are not using any props, so we can leave the argument empty. a component is a reusable piece of UI that can be rendered multiple times with different data. In this case, we are creating a ChatInput component that renders an input field and a button. The input field allows the user to type a message, and the button allows the user to send the message. We can use the onChange event to capture the user's input and update the component's state accordingly. We can also use the onClick event to handle the button click and send the message to the server or perform any other action.
+      
+      const [inputText, setInputText] = React.useState('')
+
+        function saveInputText (event) {
+          setInputText(event.target.value) //to get the text inside the input element
+        }
+
+        function sendMessage () {
+            setChatMessages([
+            ...chatMessages, // this is how to copy something (...and the name of the array we want to copy in our case is chatMessages)
+            // this below is the array that we want to add after coping the first one
+            {
+             message: 'test',
+             sender: 'user',
+             id: crypto.randomUUID() //to create a new unique id
+            }
+          ])
+        }
       return (
           
           <>
@@ -27,7 +42,7 @@
               size="30" 
               onChange={saveInputText}
             /> 
-            <button>Send</button>
+            <button onClick={sendMessage} >Send</button>
           </>
 
         )
@@ -69,9 +84,26 @@
         );
       }
 
-      function ChatMessages () {
+      function ChatMessages ({chatMessages}) {
+        return (
 
-        const [chatMessages, setChatMessages] = React.useState( // this code is to convert the chatMessages (by adding React.usesate() and putting the variable inside this brakets ) into a state(data connected to the html) so that it can update the html when we click on it
+         <>
+            { chatMessages.map((chatMessage) => {
+              return(
+                <ChatMessage
+                  message={chatMessage.message}
+                  sender={chatMessage.sender}
+                  key = {chatMessage.id}
+                />
+              );
+            })}
+          </>
+        )
+      }
+      
+      function App () {
+       
+         const [chatMessages, setChatMessages] = React.useState( // this code is to convert the chatMessages (by adding React.usesate() and putting the variable inside this brakets ) into a state(data connected to the html) so that it can update the html when we click on it
           [{
               message: 'hello ChatBot',
               sender: 'user',
@@ -102,47 +134,18 @@
         //const [chatMessages, setChatMessages] = array; // this is a shortcut of writting the code below
         //const chatMessages = array[0]; // to get the first function of our array(state) called array distructuring
         //const setChatMessages = array[1]; // this second fonction is used to update the data.
-
-
-        function sendMessage () {
-          // this code is to update the data
-          setChatMessages([
-            ...chatMessages, // this is how to copy something (...and the name of the array we want to copy in our case is chatMessages)
-            // this below is the array that we want to add after coping the first one
-            {
-             message: 'test',
-             sender: 'user',
-             id: crypto.randomUUID() //to create a new unique id
-            }
-          ])
-        }
-        return (
-
-         <>
-            <button onClick={sendMessage} >send Message</button>
-            { chatMessages.map((chatMessage) => {
-              return(
-                <ChatMessage
-                  message={chatMessage.message}
-                  sender={chatMessage.sender}
-                  key = {chatMessage.id}
-                />
-              );
-            })}
-          </>
-        )
-      }
-      
-      function App () {
-       
-
         
         // to generate html for each data saved(object) in the array. .map() takes each element in our array and convert it into a new value
 
         return(
           <> 
-            <ChatInput /> 
-            <ChatMessages />
+            <ChatInput 
+            chatMessages ={chatMessages}
+            setChatMessages = {setChatMessages}
+             /> 
+            <ChatMessages
+            chatMessages ={chatMessages}
+             />
           </>
         );
       } 
