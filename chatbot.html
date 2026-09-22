@@ -15,13 +15,17 @@
     <script type="text/babel"> // this code is to tell the browser that the code inside this script tag is written in JSX and needs to be compiled by Babel before it can be executed.
       
       function ChatInput() { // to create a React component, we can define a function that returns JSX. The function name should start with a capital letter to indicate that it is a React component. The function can take props as an argument, which is an object that contains the properties passed to the component. In this case, we are not using any props, so we can leave the argument empty. a component is a reusable piece of UI that can be rendered multiple times with different data. In this case, we are creating a ChatInput component that renders an input field and a button. The input field allows the user to type a message, and the button allows the user to send the message. We can use the onChange event to capture the user's input and update the component's state accordingly. We can also use the onClick event to handle the button click and send the message to the server or perform any other action.
-        return (
+      function saveInputText (event) {
+        event.target.value //to get the text inside the input element
+      }
+      return (
           
           <>
             <input 
               type="text" 
               placeholder="Send a message to ChatBox" 
               size="30" 
+              onChange={saveInputText}
             /> 
             <button>Send</button>
           </>
