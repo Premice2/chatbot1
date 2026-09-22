@@ -95,8 +95,9 @@
             }
           ]
         ); 
-        const chatMessages = array[0]; // to get the first object of our array(state)
-        const setChatMessages = array[1];
+        const [chatMessages, setChatMessages] = array; // this is a shortcut of writting the code below
+        //const chatMessages = array[0]; // to get the first function of our array(state) called array distructuring
+        //const setChatMessages = array[1]; // this second fonction is used to update the data
 
 
         function sendMessage () {
