@@ -36,6 +36,16 @@
           ]);
 
           const response = Chatbot.getResponse(inputText); //to get the response from the chatbot based on the input text
+            
+          setChatMessages([
+            ...chatMessages, // this is how to copy something (...and the name of the array we want to copy in our case is chatMessages)
+            // this below is the array that we want to add after coping the first one
+            {
+             message: response,
+             sender: 'robot',
+             id: crypto.randomUUID() //to create a new unique id
+            }
+          ]);
           
 
           setInputText('') // to clear the input field after sending the message
