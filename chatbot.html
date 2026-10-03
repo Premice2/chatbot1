@@ -25,7 +25,7 @@
         }
 
         function sendMessage () {
-            setChatMessages([
+          const newChatMessages = [
             ...chatMessages, // this is how to copy something (...and the name of the array we want to copy in our case is chatMessages)
             // this below is the array that we want to add after coping the first one
             {
@@ -33,12 +33,13 @@
              sender: 'user',
              id: crypto.randomUUID() //to create a new unique id
             }
-          ]);
+          ]
+          setChatMessages(newChatMessages) // to update the chatMessages state with the new array that contains the user's message;
 
           const response = Chatbot.getResponse(inputText); //to get the response from the chatbot based on the input text
             
           setChatMessages([
-            ...chatMessages, // this is how to copy something (...and the name of the array we want to copy in our case is chatMessages)
+            ...newChatMessages, // this is how to copy something (...and the name of the array we want to copy in our case is chatMessages)
             // this below is the array that we want to add after coping the first one
             {
              message: response,
