@@ -123,32 +123,7 @@
       function App () {
        
          const [chatMessages, setChatMessages] = React.useState( // this code is to convert the chatMessages (by adding React.usesate() and putting the variable inside this brakets ) into a state(data connected to the html) so that it can update the html when we click on it
-          [{
-              message: 'hello ChatBot',
-              sender: 'user',
-              id: 'id1'
-            },{
-              message: 'hello! How can I help you?',
-              sender: 'robot',
-              id: 'id2'
-            },{
-              message: 'can you get todays date?',
-              sender: 'user',
-              id: 'id3'
-            },{
-              message: 'today is September 27',
-              sender: 'robot',
-              id: 'id4'
-            },{
-              message: 'how about flip a coin',
-              sender: 'user',
-              id: 'id15'
-            },{
-              message: 'sure! You get tails!',
-              sender: 'robot',
-              id: crypto.randomUUID //to generate automatically a random id
-            }
-          ]
+          []
         ); 
         //const [chatMessages, setChatMessages] = array; // this is a shortcut of writting the code below
         //const chatMessages = array[0]; // to get the first function of our array(state) called array distructuring
