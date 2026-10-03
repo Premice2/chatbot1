@@ -2,6 +2,51 @@
 <html>
   <head>
     <title>React Basics</title>
+    <style>
+      .send-button {
+        background-color: rgb(25, 135, 84);
+        color: white;
+        border:none;
+        padding: 12px 20px;
+        margin-left:10px;
+        font-size: 15px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .chat-input {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 12px 15px;
+        font-size: 15px;
+        flex-grow: 1; /*to take up available space*/
+      }
+      .chat-input-container {
+        display: flex;
+      }
+      .chat-input-container{
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .chat-message-user {
+        display: flex;
+        justify-content: end;
+        align-items: start
+      }
+      .chat-message-robot {
+        display: flex;        
+        justify-content: start;
+        align-items: start
+      }
+      .chat-message-text {
+        background-color: #f1f1f1;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px;
+        max-width: 300px;
+        font-family: Arial, sans-serif;
+      }
+    </style>
   </head>
   <body>
     <div class="js-container"></div>
@@ -53,16 +98,20 @@
         }
       return (
           
-          <>
+          <div className="chat-input-container">
             <input 
+              className="chat-input"
               type="text" 
               placeholder="Send a message to ChatBox" 
               size="30" 
               onChange={saveInputText}
               value={inputText} // to make the input field a controlled component, we can set the value prop of the input element to the inputText state variable. This way, the input field will always reflect the current value of the inputText state, and any changes made by the user will be captured by the onChange event handler and update the state accordingly.
             /> 
-            <button onClick={sendMessage} >Send</button>
-          </>
+            <button
+             onClick={sendMessage}
+             className="send-button" //in react, we can use the className attribute instead of the class attribute to specify the CSS class of an element. This is because class is a reserved keyword in JavaScript, and using it as an attribute name can cause conflicts. Therefore, we use className to avoid any issues and ensure that our code works correctly.
+            >Send</button>
+          </div>
 
         )
       }
@@ -88,12 +137,14 @@
 
         return (
           
-          <div>
+          <div className={sender === 'user' ? 'chat-message-user' : 'chat-message-robot'} >
             {sender === 'robot' && (
               <img src="images/robot.png" width="50" />
              )
             } 
-           {message}
+            <div className="chat-message-text" >
+              {message}
+           </div>
             {sender === 'user' && (
               <img src="images/user.png" width="50" />
              )
@@ -132,7 +183,7 @@
         // to generate html for each data saved(object) in the array. .map() takes each element in our array and convert it into a new value
 
         return(
-          <> 
+          <div className="app-container"> 
             <ChatInput 
             chatMessages ={chatMessages}
             setChatMessages = {setChatMessages}
@@ -140,7 +191,7 @@
             <ChatMessages
             chatMessages ={chatMessages}
              />
-          </>
+          </div>
         );
       } 
         // up here we just created a messsage attribute to the ChatMessage component, which is a string that contains the message to be displayed. We can access the props object inside the component function and use it to render the message. We can also use destructuring to extract the message prop from the props object for convenience.
