@@ -11,6 +11,8 @@
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
+    <script src="https://unpkg.com/supersimpledev/chatbot.js" ></script>
+
     <script src="https://unpkg.com/supersimpledev/babel.js"></script> 
     <script type="text/babel"> // this code is to tell the browser that the code inside this script tag is written in JSX and needs to be compiled by Babel before it can be executed.
       
@@ -32,7 +34,7 @@
              id: crypto.randomUUID() //to create a new unique id
             }
           ]);
-          
+
           setInputText('') // to clear the input field after sending the message
         }
       return (
