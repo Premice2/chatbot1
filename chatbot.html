@@ -31,7 +31,9 @@
              sender: 'user',
              id: crypto.randomUUID() //to create a new unique id
             }
-          ])
+          ]);
+          
+          setInputText('') // to clear the input field after sending the message
         }
       return (
           
@@ -41,6 +43,7 @@
               placeholder="Send a message to ChatBox" 
               size="30" 
               onChange={saveInputText}
+              value={inputText} // to make the input field a controlled component, we can set the value prop of the input element to the inputText state variable. This way, the input field will always reflect the current value of the inputText state, and any changes made by the user will be captured by the onChange event handler and update the state accordingly.
             /> 
             <button onClick={sendMessage} >Send</button>
           </>
