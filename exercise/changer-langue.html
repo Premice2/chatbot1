@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Changer de langue</title>
+</head>
+<body>
+  <button id="btn-fr">FR</button>
+  <button id="btn-en">EN</button>
+
+  <h1 id="titre"></h1>
+  <p id="description"></p>
+  <button id="bouton-action"></button>
+
+  <script>
+    // 1. Les textes dans chaque langue
+    const textes = {
+      fr: {
+        titre: "Bienvenue",
+        description: "Ceci est mon site.",
+        action: "Commencer"
+      },
+      en: {
+        titre: "Welcome",
+        description: "This is my website.",
+        action: "Get started"
+      }
+    };
+
+    // 2. La fonction qui change la langue de la page
+    function changerLangue(langue) {
+      document.getElementById("titre").textContent = textes[langue].titre;
+      document.getElementById("description").textContent = textes[langue].description;
+      document.getElementById("bouton-action").textContent = textes[langue].action;
+
+      // On change <html lang="fr"> en <html lang="en"> (ou l'inverse)
+      document.documentElement.lang = langue;
+
+      // On retient le choix pour le prochain chargement de la page
+      localStorage.setItem("langue", langue);
+    }
+
+    // 3. Les boutons FR et EN
+    document.getElementById("btn-fr").addEventListener("click", function() {
+      changerLangue("fr");
+    });
+
+    document.getElementById("btn-en").addEventListener("click", function() {
+      changerLangue("en");
+    });
+
+    // 4. Au chargement : on remet la dernière langue choisie, sinon le français
+    changerLangue(localStorage.getItem("langue") || "fr");
+  </script>
+</body>
+</html>
