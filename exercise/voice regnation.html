@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>voise recognation</title>
+</head>
+<body>
+    <button id="micro">🎤 Parler</button>
+<p id="resultat"></p>
+
+<script>
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const reconnaissance = new SpeechRecognition();
+  reconnaissance.lang = "fr-FR";
+
+  document.getElementById("micro").addEventListener("click", function() {
+    reconnaissance.start();
+  });
+
+  reconnaissance.addEventListener("result", function(event) {
+    let texte = event.results[0][0].transcript;
+    document.getElementById("resultat").textContent = texte;
+  });
+</script>
+</body>
+</html>

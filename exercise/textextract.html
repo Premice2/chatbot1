@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>extract text</title>
+</head>
+<body>
+    <input type="file" id="photo" accept="image/*">
+    <p id="resultat"></p>
+
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script>
+    document.getElementById("photo").addEventListener("change", async function() {
+        let fichier = this.files[0];
+
+        // 1. L'OCR lit le texte sur l'image
+        let resultat = await Tesseract.recognize(fichier, "eng");
+        let texte = resultat.data.text;
+        console.log(texte);
+
+        // 2. match cherche le nombre dans ce texte
+        let nombre = texte.match(/\d+/);
+
+        document.getElementById("resultat").textContent = nombre ? nombre[0] : "Aucun nombre trouvé";
+    });
+</script>
+</body>
+</html>

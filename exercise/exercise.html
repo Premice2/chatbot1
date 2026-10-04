@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercise</title>
+</head>
+<body>
+    <button id="counter-click-button" >Time 0 clicked</button>
+    <button id="reset-button">reset</button>
+    <button id="add-two-button">+2</button>
+
+    <script>
+     document.getElementById("counter-click-button")    .addEventListener("click", function() {
+        let button = document.getElementById("counter-click-button");
+        let count = parseInt(button.textContent.match(/\d+/)[0]);
+        count++;
+        button.textContent = `Time ${count} clicked`;
+      });
+
+      document.getElementById("add-two-button").addEventListener("click", function() {
+        let button = document.getElementById("counter-click-button");
+        let count = parseInt(button.textContent.match(/\d+/)[0]);
+        count += 2;
+        button.textContent = `Time ${count} clicked`;
+      });
+
+      document.getElementById("reset-button").addEventListener("click", function() {
+        let button = document.getElementById("counter-click-button");
+        button.textContent = "Time 0 clicked";
+      });
+    </script>
+</body>
+</html>
