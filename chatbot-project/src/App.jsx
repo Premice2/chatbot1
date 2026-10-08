@@ -1,128 +1,13 @@
-import { useState,useRef,useEffect } from 'react';
+import { useState } from 'react';
 import {Chatbot} from 'supersimpledev';
 import './App.css';
 import RobotImage from './assets/robot.png';
 import UserImage from './assets/user.png';
+import { ChatInput } from './components/ChatInput';
+import { ChatMessage } from './components/ChatMessage';
+import ChatMessages from './components/ChatMessages';
 
-      function ChatInput({chatMessages, setChatMessages}) { // to create a React component, we can define a function that returns JSX. The function name should start with a capital letter to indicate that it is a React component. The function can take props as an argument, which is an object that contains the properties passed to the component. In this case, we are not using any props, so we can leave the argument empty. a component is a reusable piece of UI that can be rendered multiple times with different data. In this case, we are creating a ChatInput component that renders an input field and a button. The input field allows the user to type a message, and the button allows the user to send the message. We can use the onChange event to capture the user's input and update the component's state accordingly. We can also use the onClick event to handle the button click and send the message to the server or perform any other action.
-      
-      const [inputText, setInputText] = useState('')
 
-        function saveInputText (event) {
-          setInputText(event.target.value) //to get the text inside the input element
-        }
-
-        function sendMessage () {
-          const newChatMessages = [
-            ...chatMessages, // this is how to copy something (...and the name of the array we want to copy in our case is chatMessages)
-            // this below is the array that we want to add after coping the first one
-            {
-             message: inputText,
-             sender: 'user',
-             id: crypto.randomUUID() //to create a new unique id
-            }
-          ]
-          setChatMessages(newChatMessages) // to update the chatMessages state with the new array that contains the user's message;
-
-          const response = Chatbot.getResponse(inputText); //to get the response from the chatbot based on the input text
-            
-          setChatMessages([
-            ...newChatMessages, // this is how to copy something (...and the name of the array we want to copy in our case is chatMessages)
-            // this below is the array that we want to add after coping the first one
-            {
-             message: response,
-             sender: 'robot',
-             id: crypto.randomUUID() //to create a new unique id
-            }
-          ]);
-          
-
-          setInputText('') // to clear the input field after sending the message
-        }
-      return (
-          
-          <div className="chat-input-container">
-            <input 
-              className="chat-input"
-              type="text" 
-              placeholder="Send a message to ChatBox" 
-              size="30" 
-              onChange={saveInputText}
-              value={inputText} // to make the input field a controlled component, we can set the value prop of the input element to the inputText state variable. This way, the input field will always reflect the current value of the inputText state, and any changes made by the user will be captured by the onChange event handler and update the state accordingly.
-            /> 
-            <button
-             onClick={sendMessage}
-             className="send-button" //in react, we can use the className attribute instead of the class attribute to specify the CSS class of an element. This is because class is a reserved keyword in JavaScript, and using it as an attribute name can cause conflicts. Therefore, we use className to avoid any issues and ensure that our code works correctly.
-            >Send</button>
-          </div>
-
-        )
-      }
-
-      function ChatMessage (props) { // we can pass data to a component using props. Props are read-only and cannot be modified by the component. In this case, we are passing a message prop to the ChatMessage component, which is a string that contains the message to be displayed. We can access the props object inside the component function and use it to render the message. We can also use destructuring to extract the message prop from the props object for convenience.
-        const message = props.message; // to access the message prop, we can use props.message. We can also use destructuring to extract the message prop from the props object for convenience. For example, we can write const { message } = props; instead of const message = props.message;. This way, we can use the message variable directly without having to write props.message every time. We can also use default props to provide a fallback value for the message prop in case it is not passed to the component. For example, we can write ChatMessage.defaultProps = { message: "No message" }; to set a default value for the message prop.
-        const sender = props.sender; // we can also pass a sender prop to the ChatMessage component, which is a string that indicates who sent the message. We can use this prop to conditionally render different styles or elements based on the sender. For example, we can render a different avatar image for the user and the robot, or we can align the messages differently based on the sender. We can also use CSS classes to style the messages based on the sender. For example, we can add a className prop to the message div and set it to "user-message" or "robot-message" based on the sender. Then we can define CSS rules for these classes to style the messages accordingly.
-        // this is also a shortcut of the code below const {message} = props; const {sender} = props; or const {message, sender} = props; which is called destructuring assignment. It allows us to extract multiple properties from an object and assign them to variables in a single statement. This can make our code more concise and readable, especially when we have many props to extract.
-        
-        /*
-        all of this code has a shortcut version below(on the line 49), which is the destructuring assignment. we can use this syntax to extract the message and sender props from the props object in a single statement. This can make our code more concise and readable, especially when we have many props to extract.
-        if (sender === "robot") { 
-          return (
-            
-            <div>
-             <img src="images/robot.png" width="50" />
-             {message}
-            </div>
-
-          );
-        }  all the code on the line 49 and 52 are actually the shortcut of if statemnents {value1==='' && value2}. the way that this code works is that if the value1 is true, then the value2 will be rendered. if the value1 is false, then nothing will be rendered. this is a common pattern in React to conditionally render elements based on some condition. we can use this pattern to render different elements based on the sender prop, such as rendering a robot avatar for the robot messages and a user avatar for the user messages.
-        */
-
-        return (
-          
-          <div className={sender === 'user' ? 'chat-message-user' : 'chat-message-robot'} >
-            {sender === 'robot' && (
-              <img src={RobotImage} width="50" />
-             )
-            } 
-            <div className="chat-message-text" >
-              {message}
-           </div>
-            {sender === 'user' && (
-              <img src={UserImage} width="50" />
-             )
-            }
-          </div>
-
-        );
-      }
-
-      function ChatMessages ({chatMessages}) {
-        const  chatMessagesContainerRef = useRef( // useref is a hook that allows us to create a reference to a DOM element or a React component. We can use this reference to access the properties and methods of the element or component, such as its scroll position or its height. In this case, we are creating a reference to the chat messages container, which is a div element that contains all the chat messages. We can use this reference to scroll to the bottom of the container when a new message is added.
-          null
-        );
-       useEffect(() =>{ // to scroll to the bottom of the chat messages container when a new message is added, we can use the useEffect hook to run a function after the component has rendered. We can use the scrollTop property of the chat messages container to set its scroll position to the bottom. We can also use the scrollHeight property to get the total height of the container, which includes the height of all its child elements. By setting scrollTop to scrollHeight, we can ensure that the container is scrolled to the bottom whenever a new message is added.
-          if (chatMessagesContainerRef.current) //to if the html element exists, we can check if the current property of the reference is not null. The current property is a reference to the actual DOM element that the ref is attached to. If the current property is null, it means that the element has not been rendered yet or has been removed from the DOM. In this case, we want to scroll to the bottom of the container only if it exists, so we check if chatMessagesContainerRef.current is truthy before accessing its properties.
-           {
-              chatMessagesContainerRef.current.scrollTop = chatMessagesContainerRef.current.scrollHeight;
-            }
-       },[chatMessages] // [] this run once when the component is created if the array is empty, but if we put a variable inside the array, it will run every time that variable changes. in this case, we want to run the function every time the chatMessages state changes, so we put chatMessages inside the array.
-       );
-        return (
-
-         <div className="chat-messages-container" ref={chatMessagesContainerRef}>
-            { chatMessages.map((chatMessage) => {
-              return(
-                <ChatMessage
-                  message={chatMessage.message}
-                  sender={chatMessage.sender}
-                  key = {chatMessage.id}
-                />
-              );
-            })}
-          </div>
-        )
-      }
 
 function App() {
          const [chatMessages, setChatMessages] = useState( // this code is to convert the chatMessages (by adding React.usesate() and putting the variable inside this brakets ) into a state(data connected to the html) so that it can update the html when we click on it
