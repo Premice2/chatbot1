@@ -24,3 +24,8 @@ documentation du commit:
         }
 
         export default App
+shortcut
+    <Routes>
+      <Route index element={<HomePage />} />  // we can put index instead of path="/" 
+      <Route path="checkout" element={<div>Checkout Page</div>}  /> 
+    </Routes>
