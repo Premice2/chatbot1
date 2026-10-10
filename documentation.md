@@ -31,3 +31,5 @@ shortcut
     </Routes>
 
 here we created the <Header /> components so that we can use it in multiple files and easy to modify    
+
+THe Link element let us go to an other page without reloading so we are going to use it instead of the <a></a> element and replace the href="..." by to="..."
