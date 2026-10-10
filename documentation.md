@@ -29,3 +29,5 @@ shortcut
       <Route index element={<HomePage />} />  // we can put index instead of path="/" 
       <Route path="checkout" element={<div>Checkout Page</div>}  /> 
     </Routes>
+
+here we created the <Header /> components so that we can use it in multiple files and easy to modify    
