@@ -1,3 +1,4 @@
+import './OrdersPage.css';
 
 export function OrdersPages() {
     return (
@@ -23,7 +24,7 @@ export function OrdersPages() {
                 </div>
 
                 <div className="right-section">
-                    <a className="orders-link header-link" href="orders.html">
+                    <a className="orders-link header-link" href="orders">
 
                         <span className="orders-text">Orders</span>
                     </a>
